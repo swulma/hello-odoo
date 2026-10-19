@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_hello_odoo_note_list" model="ir.ui.view">
+        <field name="name">hello.odoo.note.list</field>
+        <field name="model">hello.odoo.note</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="title"/>
+                <field name="date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_hello_odoo_note_form" model="ir.ui.view">
+        <field name="name">hello.odoo.note.form</field>
+        <field name="model">hello.odoo.note</field>
+        <field name="arch" type="xml">
+            <form string="Hello Odoo Note">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="title"/>
+                        <h1>
+                            <field name="title"
+                                   placeholder="Note title..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="date"/>
+                        <field name="content"
+                               placeholder="Write your note here..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_hello_odoo_note_search" model="ir.ui.view">
+        <field name="name">hello.odoo.note.search</field>
+        <field name="model">hello.odoo.note</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="title"/>
+                <filter string="Created On"
+                        name="group_by_date"
+                        domain="[]"
+                        context="{'group_by': 'date'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Window Action -->
+    <record id="action_hello_odoo_note"
+            model="ir.actions.act_window">
+        <field name="name">Hello Odoo Notes</field>
+        <field name="res_model">hello.odoo.note</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id"
+               ref="view_hello_odoo_note_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first note!
+            </p>
+        </field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_hello_odoo_root"
+              name="Hello Odoo"
+              sequence="10"/>
+
+    <menuitem id="menu_hello_odoo_note"
+              name="Notes"
+              parent="menu_hello_odoo_root"
+              action="action_hello_odoo_note"
+              sequence="10"/>
+
+</odoo>
